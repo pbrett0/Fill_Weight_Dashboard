@@ -15,7 +15,7 @@ app = dash.Dash(__name__)
 engine_azure = create_engine("mysql+mysqlconnector://server_login:DataVisual123@data-visualisation-db.mysql.database.azure.com/data_vis_db")
 
 # Import the Excel File and assign to pd Dataframe
-df = pd.read_sql('SELECT * FROM fill_weight_data', con = engine_azure)
+df = pd.read_sql("SELECT * FROM fill_weight_data LIMIT 1377", con = engine_azure)
 
 # Sorting the Values by Date-Time
 df['Measurement date-time'] = pd.to_datetime(df['Measurement date-time'])
@@ -62,7 +62,7 @@ for key in range(len(batch_stats)):
 # IPC Mode Dropdown (Note NaN will cause errors)
 dicts_1 = []
 unique_values = limit_chart['IPC Mode'].unique()
-for key in range(len(unique_values))[:-1]:
+for key in range(len(unique_values)):
     dicts_1.append({'label': str(unique_values[key]), 'value': unique_values[key]})
 
 # Dashboard Layout
