@@ -8,16 +8,11 @@ import plotly.express as px
 import plotly.graph_objects as go
 import pandas as pd
 from sqlalchemy import create_engine
-import urllib
-import pyodbc
 
 app = dash.Dash(__name__)
 
 # Connection to the SQL Database
-params = urllib.parse.quote_plus \
-(r'Driver={ODBC Driver 13 for SQL Server};Server=tcp:datavisualisationserver.database.windows.net,1433;Database=data_visualisation_db;Uid=server_login;Pwd=DataVisual123;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;')
-conn_str = 'mssql+pyodbc:///?odbc_connect={}'.format(params)
-engine_azure = create_engine(conn_str, echo=True)
+engine_azure = create_engine("mysql+mysqlconnector://server_login:DataVisual123@data-visualisation-db.mysql.database.azure.com/data_vis_db")
 
 # Import the Excel File and assign to pd Dataframe
 df = pd.read_sql('SELECT * FROM fill_weight_data', con = engine_azure)
