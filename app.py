@@ -215,6 +215,5 @@ def update_graph(batch_selected, ipc_selected, nelson_selected):
         
     return container, fig
 
-
 if __name__ == '__main__':
     app.run_server(port = 8000)
