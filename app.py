@@ -10,6 +10,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 
 app = dash.Dash(__name__)
+server = app.server
 
 # Connection to the SQL Database
 engine_azure = create_engine("mysql+mysqlconnector://server_login:DataVisual123@data-visualisation-db.mysql.database.azure.com/data_vis_db")
