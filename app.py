@@ -1,4 +1,4 @@
-# Run this app with `python app.py` and visit http://127.0.0.1:8050/ in your web browser.
+# Run this app with `python app.py` and visit http://127.0.0.1:8050  or http://localhost:8050 in your web browser.
 import dash
 from dash import dcc
 from dash import html
@@ -12,11 +12,14 @@ from sqlalchemy import create_engine
 application = dash.Dash(__name__)
 app = application
 
-# Connection to the SQL Database
-engine_azure = create_engine("mysql+mysqlconnector://server_login:DataVisual123@data-visualisation-db.mysql.database.azure.com/data_vis_db")
+# Connection to the SQL Database ()
+# engine_azure = create_engine("mysql+mysqlconnector://server_login:{mysqlazurelogin}")
 
 # Import the Excel File and assign to pd Dataframe
-df = pd.read_sql("SELECT * FROM fill_weight_data", con = engine_azure)
+# df = pd.read_sql("SELECT * FROM fill_weight_data", con = engine_azure)
+
+# Importing the Data via Excel file if SQL Database is not setup (openpyxl is required to run this)
+df = pd.read_excel(r"Dataset D.xlsx", sheet_name='Dataset D')
 
 # Sorting the Values by Date-Time
 df['Measurement date-time'] = pd.to_datetime(df['Measurement date-time'])
@@ -217,4 +220,4 @@ def update_graph(batch_selected, ipc_selected, nelson_selected):
 
 
 if __name__ == '__main__':
-    app.run_server(host = '0.0.0.0', port = 8080)
+    app.run_server()
